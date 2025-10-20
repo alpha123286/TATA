@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engine Bin Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f5f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1e3d59;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        main {
+            margin: 30px auto;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e3d59;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+        .result {
+            margin-top: 20px;
+            background-color: #eef3f7;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #1e3d59;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Car Engine Manufacturing - Bin Calculator</h1>
+    </header>
+
+    <main>
+        <h2>Calculate Bins Needed</h2>
+
+        <label for="hv">Number of HV Engines:</label>
+        <input type="number" id="hv" placeholder="Enter number of HV engines">
+
+        <label for="cf">Number of CF Engines:</label>
+        <input type="number" id="cf" placeholder="Enter number of CF engines">
+
+        <label for="cv">Number of CV Engines:</label>
+        <input type="number" id="cv" placeholder="Enter number of CV engines">
+
+        <button onclick="calculateBins()">Calculate</button>
+
+        <div class="result" id="result"></div>
+    </main>
+
+    <footer>
+        &copy; 2025 Engine Manufacturing Co.
+    </footer>
+
+    <script>
+    function calculateBins() {
+      const hv = parseInt(document.getElementById('hv').value) || 0;
+      const cf = parseInt(document.getElementById('cf').value) || 0;
+      const cv = parseInt(document.getElementById('cv').value) || 0;
+
+      // Bolts per engine
+      const hvBolts = hv * 2;
+      const cfBolts = cf * 2;
+      const cvBolts = cv * 5;
+
+      // Bin capacity
+      const hvBinCapacity = 4;
+      const cfBinCapacity = 4;
+      const cvBinCapacity = 25;
+
+      // Calculate bins needed (round up if not exact)
+      const hvBins = Math.ceil(hvBolts / hvBinCapacity);
+      const cfBins = Math.ceil(cfBolts / cfBinCapacity);
+      const cvBins = Math.ceil(cvBolts / cvBinCapacity);
+
+      const totalBins = hvBins + cfBins + cvBins;
+
+      document.getElementById('result').innerHTML = `
+        <h3>Result:</h3>
+        <p>HV Engines: ${hv} × 2 bolts = ${hvBolts} bolts → <strong>${hvBins} bins</strong></p>
+        <p>CF Engines: ${cf} × 2 bolts = ${cfBolts} bolts → <strong>${cfBins} bins</strong></p>
+        <p>CV Engines: ${cv} × 5 bolts = ${cvBolts} bolts → <strong>${cvBins} bins</strong></p>
+        <hr>
+        <p><strong>Total Bins Needed: ${totalBins}</strong></p>
+      `;
+    }
+    </script>
+
+</body>
+</html>
